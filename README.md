@@ -8,3 +8,9 @@ src/
 ├── main/
 │   └── resources/
 │       └── config.properties # Configuration settings
+
+
+Minimum pre requisites to trigger the suit
+___________________________________________
+|__Maven should be insatlled (3.9.4)
+|__Java should be installed (17.0)
