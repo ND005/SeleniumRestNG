@@ -5,30 +5,30 @@ import com.testing.ui.pathLocators.Login_UI;
 
 public class login_Form {
 	private WebDriver driver;
+	private Login_UI loginUI;
 
 	public login_Form(WebDriver driver) {
 		this.driver = driver;
+		this.loginUI = new Login_UI(driver);
 	}
 
-	Login_UI ln = new Login_UI(driver);
-
-	public boolean new_UserData() {
-		try {
-			ln.signup_Usermail().sendKeys("");
-			ln.signup_Name().sendKeys("");
-			ln.signup__Btn();
+	public boolean new_UserData(String userName, String email) {
+		if (loginUI.signup_Usermail().isDisplayed() && loginUI.signup_Name().isDisplayed()) {
+			loginUI.signup_Usermail().sendKeys(userName);
+			loginUI.signup_Name().sendKeys(email);
+			loginUI.signup__Btn();
 			return true;
-		} catch (Exception e) {
-			System.out.checkError();
 		}
+		System.out.println("Email element :" + loginUI.signup_Usermail().isDisplayed() + ",Name Element :"
+				+ loginUI.signup_Name().isDisplayed());
 		return false;
 	}
 
-	public boolean login_UserData() {
+	public boolean login_UserData(String email, String password) {
 		try {
-			ln.loginUserName().sendKeys("");
-			ln.loginPassword().sendKeys("");
-			ln.login_Btn();
+			loginUI.loginUserName().sendKeys(email);
+			loginUI.loginPassword().sendKeys(password);
+			loginUI.signup__Btn();
 			return true;
 		} catch (Exception e) {
 			System.out.checkError();

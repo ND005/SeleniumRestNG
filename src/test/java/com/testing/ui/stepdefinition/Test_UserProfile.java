@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.util.Properties;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+
+import com.testing.ui.pom.login_Form;
 import com.testing.ui.pom.ui_navigations;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -18,7 +20,10 @@ public class Test_UserProfile {
 	TestUtil utilTest = new TestUtil();
 	private WebDriver driver = TestUtil.getDriver();
 	Properties prop = new Properties();
+
 	ui_navigations UIFlow = new ui_navigations(driver);
+	login_Form loginForm = new login_Form(driver);
+
 	File files = new File("src/test/resources/basicRessources/basicResouces.properties");
 
 	@Given("Launch and navigate to AEC application UI")
@@ -45,15 +50,16 @@ public class Test_UserProfile {
 		Assert.assertTrue("[ERROR] : Step 1:- Navigate to home screen", UIFlow.navigateToHomeScreen(driver));
 	}
 
-	@And("Create an account with new user details")
-	public void create_an_account_with_new_user_details() {
-		
+	@And("Create an account with details provided in test files")
+	public void create_an_account() {
+		String Test_Name = null;
+		String Test_mailID = null;
+		Assert.assertTrue("[ERROR] : Step 2:- Verify Login UI ", loginForm.new_UserData(Test_Name, Test_mailID));
 	}
 
 	@Then("Verify the account creation form and its fields")
 	public void verify_the_account_creation_form_and_its_fields() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+
 	}
 
 	@Then("Verify the profile creation with confirmation messagae")
@@ -62,10 +68,9 @@ public class Test_UserProfile {
 		throw new io.cucumber.java.PendingException();
 	}
 
-	@Then("Verify login functionality of created data")
-	public void verify_login_functionality_of_created_data() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+	@Then("^Verify login functionality with (.*) and (.*) details$")
+	public void verify_login_functionality_of_created_data(String email, String password) {
+		Assert.assertTrue("[ERROR] : Step 2:- Verify Login UI ", loginForm.login_UserData(email, password));
 	}
 
 	@Then("Delete the profile and verify the delete action with confirmation messagae")
