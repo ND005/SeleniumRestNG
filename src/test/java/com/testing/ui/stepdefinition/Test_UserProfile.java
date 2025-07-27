@@ -47,7 +47,7 @@ public class Test_UserProfile {
 
 	@And("Create an account with new user details")
 	public void create_an_account_with_new_user_details() {
-
+		
 	}
 
 	@Then("Verify the account creation form and its fields")
