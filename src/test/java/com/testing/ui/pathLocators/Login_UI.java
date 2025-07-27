@@ -28,7 +28,7 @@ public class Login_UI {
 	}
 
 	public WebElement signup_Name() {
-		return driver.findElement(By.xpath("//form[@action='/signup']/input[@type='Name']"));
+		return driver.findElement(By.xpath("//form[@action='/signup']/input[@type='text']"));
 	}
 
 	public WebElement signup__Btn() {
