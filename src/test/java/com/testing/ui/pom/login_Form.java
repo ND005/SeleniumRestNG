@@ -1,17 +1,21 @@
 package com.testing.ui.pom;
 
 import java.util.HashMap;
+
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import com.testing.ui.pathLocators.Login_UI;
 import com.testing.ui.pathLocators.sigup_form_UI;
 import com.testing.ui.stepdefinition.TestUtil;
 
 public class login_Form {
+	private WebDriver driver;
 	private Login_UI loginUI;
 	private sigup_form_UI sigup_form_UI;
 	TestUtil utilTest = new TestUtil();
 
 	public login_Form(WebDriver driver) {
+		this.driver =driver;
 		this.loginUI = new Login_UI(driver);
 		this.sigup_form_UI = new sigup_form_UI(driver);
 	}
@@ -38,7 +42,7 @@ public class login_Form {
 		return false;
 	}
 
-	public boolean inputTypeText(HashMap<String, String> values) {
+	public boolean inputTypeText(HashMap<String, String> values) throws Throwable {
 		// Send password
 
 		if (sigup_form_UI.inputPassword().isDisplayed() && sigup_form_UI.inputFirstName().isDisplayed()
@@ -59,7 +63,12 @@ public class login_Form {
 			sigup_form_UI.inputState().sendKeys(values.get("State"));
 			sigup_form_UI.inputZipcode().sendKeys(values.get("Zip code").split(":")[1]);
 			sigup_form_UI.inputMobile().sendKeys(values.get("Mobile").split(":")[1]);
-			sigup_form_UI.create_submit_Btn().click();
+			if(sigup_form_UI.create_submit_Btn().isDisplayed()) {
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				js.executeScript("window.scrollBy(0, 30);");
+				Thread.sleep(2000);
+				sigup_form_UI.create_submit_Btn().click();
+			}
 			System.out.println("All Completed");
 			return true;
 		}
