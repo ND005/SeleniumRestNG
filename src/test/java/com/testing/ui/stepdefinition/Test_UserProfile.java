@@ -52,30 +52,48 @@ public class Test_UserProfile {
 
 	@And("Create an account with details provided in test files")
 	public void create_an_account() {
-		String Test_Name = null;
-		String Test_mailID = null;
-		Assert.assertTrue("[ERROR] : Step 2:- Verify Login UI ", loginForm.new_UserData(Test_Name, Test_mailID));
+		String Test_Name = utilTest.signup_form_TestData().get("Name");
+		String Test_mailID = utilTest.signup_form_TestData().get("Email");
+		try {
+			Assert.assertTrue("[ERROR] : Step 2:- Verify Login UI", loginForm.new_UserData(Test_Name, Test_mailID));
+			Thread.sleep(3000);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
 	}
 
-	@Then("Verify the account creation form and its fields")
+	@Then("Verify the account creation process and its fields")
 	public void verify_the_account_creation_form_and_its_fields() {
-
+		Assert.assertTrue("[ERROR] : Step 3:- Fill the Form ",
+				loginForm.inputTypeText(utilTest.signup_form_TestData()));
 	}
 
 	@Then("Verify the profile creation with confirmation messagae")
-	public void verify_the_profile_creation_with_confirmation_messagae() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+	public void verify_the_profile_creation_with_confirmation_messagae() throws Throwable {
+		Assert.assertTrue("[ERROR] : Step 4:- Complete account signup process", loginForm.create_confirmation_UI());
+		Thread.sleep(5000);
+		Assert.assertTrue("[ERROR] : Step 5:- Verify Home screen after Login", UIFlow.ui_after_login());
 	}
 
 	@Then("^Verify login functionality with (.*) and (.*) details$")
-	public void verify_login_functionality_of_created_data(String email, String password) {
-		Assert.assertTrue("[ERROR] : Step 2:- Verify Login UI ", loginForm.login_UserData(email, password));
+	public void verify_login_functionality_of_created_data(String email, String password) throws Throwable {
+		Assert.assertTrue("[ERROR] : Step 2:- Verify Login UI", loginForm.login_UserData(email, password));
+		Thread.sleep(10000);
+		Assert.assertTrue("[ERROR] : Step 3:- Verify Home screen after Login", UIFlow.ui_after_login());
+		Assert.assertTrue("[ERROR] : Step 4:- Verify Logout", UIFlow.logout());
 	}
 
-	@Then("Delete the profile and verify the delete action with confirmation messagae")
-	public void delete_the_profile_and_verify_the_delete_action_with_confirmation_messagae() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+	@Then("Verify the login ui before delete the profile")
+	public void delete_the_profile() throws Throwable {
+		String pwd = utilTest.signup_form_TestData().get("Password");
+		String Test_mailID = utilTest.signup_form_TestData().get("Email");
+		Assert.assertTrue("[ERROR] : Step 3:- Verify Login UI", loginForm.login_UserData(Test_mailID, pwd));
+		Thread.sleep(5000);
+		Assert.assertTrue("[ERROR] : Step 4:- Verify delete UI", UIFlow.delete_Profile());
+	}
+
+	@And("Verify the delete action with confirmation message")
+	public void delete_confirmation() {
+		Assert.assertTrue("[ERROR] : Step 5:- Verify delete UI", loginForm.delete_confirmation_UI());
 	}
 }
