@@ -55,11 +55,11 @@ public class TestUtil {
 			XSSFWorkbook workbook = new XSSFWorkbook(fis);
 			XSSFSheet sheet = workbook.getSheet("RegistrationForm");
 			if (sheet != null) {
-				for (int rowIndex = 0; rowIndex <= sheet.getLastRowNum() - 2; rowIndex++) {
+				for (int rowIndex = 0; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
 					Cell Key = sheet.getRow(rowIndex).getCell(0);
 					Cell Value = sheet.getRow(rowIndex).getCell(1);
 					if (Key.getStringCellValue() != null && Value.getStringCellValue() != null) {
-						userTest_Data.put(Key.getStringCellValue(), Value.getStringCellValue());
+						userTest_Data.put(Key.getStringCellValue().toString(), Value.getStringCellValue().toString());
 					} else {
 						break;
 					}

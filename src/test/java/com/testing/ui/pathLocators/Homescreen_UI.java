@@ -4,13 +4,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class menu_Bar {
+public class Homescreen_UI {
 	private WebDriver driver;
-	
-	public menu_Bar(WebDriver driver) {
+
+	public Homescreen_UI(WebDriver driver) {
 		this.driver = driver;
 	}
-	
+
 	public WebElement home_Button() {
 		return driver.findElement(By.xpath("//ul[@class='nav navbar-nav']/li[1]"));
 	}
@@ -34,4 +34,13 @@ public class menu_Bar {
 	public WebElement apiTesting_Button() {
 		return driver.findElement(By.xpath("//ul[@class='nav navbar-nav']/li[6]"));
 	}
+
+	public WebElement logout_Button() {
+		return driver.findElement(By.xpath("//li//a[contains(text(), ' Logout')]"));
+	}
+
+	public WebElement delete_Button() {
+		return driver.findElement(By.xpath("//li//a[contains(text(), ' Delete Account')]"));
+	}
+
 }
