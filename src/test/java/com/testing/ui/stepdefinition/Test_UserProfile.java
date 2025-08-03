@@ -71,14 +71,14 @@ public class Test_UserProfile {
 	@Then("Verify the profile creation with confirmation messagae")
 	public void verify_the_profile_creation_with_confirmation_messagae() throws Throwable {
 		Assert.assertTrue("[ERROR] : Step 4:- Complete account signup process", loginForm.create_confirmation_UI());
-		Thread.sleep(5000);
+		Thread.sleep(3000);
 		Assert.assertTrue("[ERROR] : Step 5:- Verify Home screen after Login", UIFlow.ui_after_login());
 	}
 
 	@Then("^Verify login functionality with (.*) and (.*) details$")
 	public void verify_login_functionality_of_created_data(String email, String password) throws Throwable {
 		Assert.assertTrue("[ERROR] : Step 2:- Verify Login UI", loginForm.login_UserData(email, password));
-		Thread.sleep(5000);
+		Thread.sleep(3000);
 		Assert.assertTrue("[ERROR] : Step 3:- Verify Home screen after Login", UIFlow.ui_after_login());
 		Assert.assertTrue("[ERROR] : Step 4:- Verify Logout", UIFlow.logout());
 	}
@@ -88,7 +88,7 @@ public class Test_UserProfile {
 		String pwd = utilTest.signup_form_TestData().get("Password");
 		String Test_mailID = utilTest.signup_form_TestData().get("Email");
 		Assert.assertTrue("[ERROR] : Step 3:- Verify Login UI", loginForm.login_UserData(Test_mailID, pwd));
-		Thread.sleep(5000);
+		Thread.sleep(3000);
 		Assert.assertTrue("[ERROR] : Step 4:- Verify delete UI", UIFlow.delete_Profile());
 	}
 
