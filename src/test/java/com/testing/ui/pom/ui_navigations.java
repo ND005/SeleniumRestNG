@@ -87,4 +87,13 @@ public class ui_navigations {
 		return false;
 	}
 
+	public boolean navigateToContact_us() {
+		Homescreen_UI menuPage = new Homescreen_UI(driver);
+		if (menuPage.contactus_Button().isDisplayed()) {
+			menuPage.contactus_Button().click();
+			return true;
+		}
+		return false;
+	}
+
 }

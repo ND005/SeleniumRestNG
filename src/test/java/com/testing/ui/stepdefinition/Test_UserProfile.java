@@ -20,7 +20,6 @@ public class Test_UserProfile {
 	TestUtil utilTest = new TestUtil();
 	private WebDriver driver = TestUtil.getDriver();
 	Properties prop = new Properties();
-
 	ui_navigations UIFlow = new ui_navigations(driver);
 	login_Form loginForm = new login_Form(driver);
 
