@@ -42,5 +42,9 @@ public class Homescreen_UI {
 	public WebElement delete_Button() {
 		return driver.findElement(By.xpath("//li//a[contains(text(), ' Delete Account')]"));
 	}
+	
+	public WebElement contactus_Button() {
+		return driver.findElement(By.xpath("//li//a[@href='/contact_us']"));
+	}
 
 }

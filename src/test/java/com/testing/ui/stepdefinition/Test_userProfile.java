@@ -16,12 +16,11 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class Test_UserProfile {
+public class Test_userProfile {
 	TestUtil utilTest = new TestUtil();
 	private WebDriver driver = TestUtil.getDriver();
 	Properties prop = new Properties();
-
-	ui_navigations UIFlow = new ui_navigations(driver);
+	ui_navigations uiflow = new ui_navigations(driver);
 	login_Form loginForm = new login_Form(driver);
 
 	File files = new File("src/test/resources/basicRessources/basicResouces.properties");
@@ -36,18 +35,18 @@ public class Test_UserProfile {
 	@When("Verify the home screen and navigate signup screen")
 	public void verify_the_home_screen_type01() {
 		Assert.assertTrue("[ERROR] : Step  1:-  Navigate to home screen & Then Login screen",
-				UIFlow.navigateToHomeScreen(driver) && UIFlow.navigateToLoginScreen(driver));
+				uiflow.navigateToHomeScreen(driver) && uiflow.navigateToLoginScreen(driver));
 	}
 
 	@When("Verify the home screen and navigate login screen")
 	public void verify_the_home_screen_type02() {
 		Assert.assertTrue("[ERROR] : Step  1:-  Navigate to home screen & Then Login screen",
-				UIFlow.navigateToHomeScreen(driver) && UIFlow.navigateToLoginScreen(driver));
+				uiflow.navigateToHomeScreen(driver) && uiflow.navigateToLoginScreen(driver));
 	}
 
 	@When("Verify the home screen")
 	public void verify_the_home_screen_type03() {
-		Assert.assertTrue("[ERROR] : Step 1:- Navigate to home screen", UIFlow.navigateToHomeScreen(driver));
+		Assert.assertTrue("[ERROR] : Step 1:- Navigate to home screen", uiflow.navigateToHomeScreen(driver));
 	}
 
 	@And("Create an account with details provided in test files")
@@ -71,16 +70,16 @@ public class Test_UserProfile {
 	@Then("Verify the profile creation with confirmation messagae")
 	public void verify_the_profile_creation_with_confirmation_messagae() throws Throwable {
 		Assert.assertTrue("[ERROR] : Step 4:- Complete account signup process", loginForm.create_confirmation_UI());
-		Thread.sleep(3000);
-		Assert.assertTrue("[ERROR] : Step 5:- Verify Home screen after Login", UIFlow.ui_after_login());
+		Thread.sleep(5000);
+		Assert.assertTrue("[ERROR] : Step 5:- Verify Home screen after Login", uiflow.ui_after_login());
 	}
 
 	@Then("^Verify login functionality with (.*) and (.*) details$")
 	public void verify_login_functionality_of_created_data(String email, String password) throws Throwable {
 		Assert.assertTrue("[ERROR] : Step 2:- Verify Login UI", loginForm.login_UserData(email, password));
-		Thread.sleep(3000);
-		Assert.assertTrue("[ERROR] : Step 3:- Verify Home screen after Login", UIFlow.ui_after_login());
-		Assert.assertTrue("[ERROR] : Step 4:- Verify Logout", UIFlow.logout());
+		Thread.sleep(5000);
+		Assert.assertTrue("[ERROR] : Step 3:- Verify Home screen after Login", uiflow.ui_after_login());
+		Assert.assertTrue("[ERROR] : Step 4:- Verify Logout", uiflow.logout());
 	}
 
 	@Then("Verify the login ui before delete the profile")
@@ -88,8 +87,8 @@ public class Test_UserProfile {
 		String pwd = utilTest.signup_form_TestData().get("Password");
 		String Test_mailID = utilTest.signup_form_TestData().get("Email");
 		Assert.assertTrue("[ERROR] : Step 3:- Verify Login UI", loginForm.login_UserData(Test_mailID, pwd));
-		Thread.sleep(3000);
-		Assert.assertTrue("[ERROR] : Step 4:- Verify delete UI", UIFlow.delete_Profile());
+		Thread.sleep(5000);
+		Assert.assertTrue("[ERROR] : Step 4:- Verify delete UI", uiflow.delete_Profile());
 	}
 
 	@And("Verify the delete action with confirmation message")
