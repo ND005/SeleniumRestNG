@@ -4,12 +4,12 @@ Feature: TC 03: Verify Products screen, cart screen and all it's functionalities
     Given Launch and navigate to AEC application UI
     When Verify the home screen and navigate login screen
     Then Login to user profile using <Email> and <Password> details
-    And Verify search by product details functionality
+    And Verify search by product <details> functionality
     And Verify category and brands sections
 
     Examples: 
-      | Email                   | Password   |
-      | DefaultUser@testing.com | A2ZTesting |
+      | Email                   | Password   | details |
+      | DefaultUser@testing.com | A2ZTesting | Shirt   |
 
   Scenario Outline: TS 02 - Verify Top 3 product details and add in cart
     Given Launch and navigate to AEC application UI

@@ -16,8 +16,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class Test_userProfile {
-	TestUtil utilTest = new TestUtil();
+public class Test_userProfile extends TestUtil {
 	private WebDriver driver = TestUtil.getDriver();
 	Properties prop = new Properties();
 	ui_navigations uiflow = new ui_navigations(driver);
@@ -33,26 +32,26 @@ public class Test_userProfile {
 	}
 
 	@When("Verify the home screen and navigate signup screen")
-	public void verify_the_home_screen_type01() {
+	public void home_screen_type01() {
 		Assert.assertTrue("[ERROR] : Step  1:-  Navigate to home screen & Then Login screen",
 				uiflow.navigateToHomeScreen(driver) && uiflow.navigateToLoginScreen(driver));
 	}
 
 	@When("Verify the home screen and navigate login screen")
-	public void verify_the_home_screen_type02() {
+	public void home_screen_type02() {
 		Assert.assertTrue("[ERROR] : Step  1:-  Navigate to home screen & Then Login screen",
 				uiflow.navigateToHomeScreen(driver) && uiflow.navigateToLoginScreen(driver));
 	}
 
 	@When("Verify the home screen")
-	public void verify_the_home_screen_type03() {
+	public void home_screen_type03() {
 		Assert.assertTrue("[ERROR] : Step 1:- Navigate to home screen", uiflow.navigateToHomeScreen(driver));
 	}
 
 	@And("Create an account with details provided in test files")
 	public void create_an_account() {
-		String Test_Name = utilTest.signup_form_TestData().get("Name");
-		String Test_mailID = utilTest.signup_form_TestData().get("Email");
+		String Test_Name = signup_form_TestData().get("Name");
+		String Test_mailID = signup_form_TestData().get("Email");
 		try {
 			Assert.assertTrue("[ERROR] : Step 2:- Verify Login UI", loginForm.new_UserData(Test_Name, Test_mailID));
 			Thread.sleep(3000);
@@ -64,7 +63,7 @@ public class Test_userProfile {
 	@Then("Verify the account creation process and its fields")
 	public void verify_the_account_creation_form_and_its_fields() throws Throwable {
 		Assert.assertTrue("[ERROR] : Step 3:- Fill the Form ",
-				loginForm.inputTypeText(utilTest.signup_form_TestData()));
+				loginForm.inputTypeText(signup_form_TestData()));
 	}
 
 	@Then("Verify the profile creation with confirmation messagae")
@@ -84,8 +83,8 @@ public class Test_userProfile {
 
 	@Then("Verify the login ui before delete the profile")
 	public void delete_the_profile() throws Throwable {
-		String pwd = utilTest.signup_form_TestData().get("Password");
-		String Test_mailID = utilTest.signup_form_TestData().get("Email");
+		String pwd = signup_form_TestData().get("Password");
+		String Test_mailID = signup_form_TestData().get("Email");
 		Assert.assertTrue("[ERROR] : Step 3:- Verify Login UI", loginForm.login_UserData(Test_mailID, pwd));
 		Thread.sleep(5000);
 		Assert.assertTrue("[ERROR] : Step 4:- Verify delete UI", uiflow.delete_Profile());

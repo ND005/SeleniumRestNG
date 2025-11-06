@@ -8,9 +8,7 @@ import com.testing.ui.pom.ui_navigations;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 
-public class Test_contactUs {
-
-	TestUtil utilTest = new TestUtil();
+public class Test_contactUs extends TestUtil {
 	private WebDriver driver = TestUtil.getDriver();
 	ui_navigations UIFlow = new ui_navigations(driver);
 	login_Form loginForm = new login_Form(driver);
